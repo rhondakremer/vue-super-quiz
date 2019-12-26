@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 style="text-align:center">Super Quiz</h1>
+    <keep-alive>
+      <component @switchComponent="questionUp = !questionUp" :is="dynamicComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Question from './components/Question.vue'
+import Correct from './components/Correct.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Question, Correct
+  },
+  data() {
+    return {
+      questionUp: true
+    }
+  },
+  computed: {
+    dynamicComponent() {
+      if (this.questionUp === true) {
+        return Question;
+      }
+      else {
+        return Correct;
+      }
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
