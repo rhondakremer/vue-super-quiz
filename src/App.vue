@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 style="text-align:center">Super Quiz</h1>
-    <transition enter-active-class="animated flipInX" leave-active-class="animated flipOutY" mode="out-in">
+    <transition name="flip" mode="out-in">
     <!-- <keep-alive> -->
       <component @switchComponent="nextQuestion" :is="dynamicComponent" :index="index"></component>
     <!-- </keep-alive> -->
@@ -46,39 +46,29 @@ export default {
 </script>
 
 <style>
-.slide-enter {
-  opacity: 0;
+.flip-enter-active {
+  animation: flip-in 1s ease-out forwards;
 }
 
-.slide-enter-active {
-  animation: slide-in 1s ease-out forwards;
-  transition: opacity 1s;
+.flip-leave-active {
+  animation: flip-out 1s ease-out forwards;
 }
 
-.slide-leave-to {
-  opacity: 0;
-}
-
-.slide-leave-active {
-  animation: slide-out 1s ease-out forwards;
-  transition: opacity 1s;
-}
-
-@keyframes slide-in {
+@keyframes flip-in {
   from {
-    transform: translateX(90%);
+    transform: rotateY(90deg);
   }
   to {
-    transform: translateX(O)
+    transform: rotateY(0deg)
   }
 }
 
-@keyframes slide-out {
+@keyframes flip-out {
   from {
-    transform: translateX(0)
+    transform: rotateY(0deg)
   }
   to {
-    transform: translateX(90%)
+    transform: rotateY(90deg)
   }
 }
 </style>
